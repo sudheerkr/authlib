@@ -5,8 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('../routes/index');
-var users = require('../routes/users');
+// jwt or model require
+var jwt = require('jsonwebtoken');
+var config = require('../config/config');
+var usermodel = require('./models/users');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
 var app = express();
 
