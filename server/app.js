@@ -8,13 +8,15 @@ var bodyParser = require('body-parser');
 // jwt or model require
 var jwt = require('jsonwebtoken');
 var config = require('../config/config');
-var usermodel = require('./models/users');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+// config setting
+var config = require('../config/config');
 
 var app = express();
-
+app.set('superSecret', config.secret);
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');
