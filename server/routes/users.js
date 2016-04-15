@@ -27,7 +27,7 @@ router.get('/alluser', function(req, res){
 router.post('/auth', function(req, res){
 	// find the user
 	console.log({name: req.body.name});
-	usermodel.find({name: req.body.name}, function(err, user){
+	usermodel.findOne({name: req.body.name}, function(err, user){
 		if (err) {
 			throw err;
 		}else{
