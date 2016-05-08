@@ -4,6 +4,25 @@
  * Module dependencies.
  */
 
+var cluster = require('cluster');
+var os = require('os');
+
+// code execute in Master process
+if (cluster.isMaster) {
+  var cpuCount = os.cpus().length;
+  for (var i = 0; i < cpuCount; i++) {
+    cluster.fork();
+  }
+
+  // Listen for dying worker 
+  cluster.on('exit', function(worker){
+    // replace the dead worker.
+    console.log('Worker %d died :(', worker.id);
+    cluster.fork();
+  });
+}else{
+  // code run in worker process
+
 var app = require('./app');
 var debug = require('debug')('jwt-auth:server');
 var http = require('http');
@@ -81,10 +100,11 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    function onListening() {
+      var addr = server.address();
+      var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+      debug('Listening on ' + bind);
+    }
 }
