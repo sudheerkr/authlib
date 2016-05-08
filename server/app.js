@@ -8,20 +8,19 @@ var bodyParser = require('body-parser');
 
 // jwt or model require
 var jwt = require('jsonwebtoken');
+// config setting
 var config = require('../config/config');
 
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
-// config setting
-var config = require('../config/config');
 
 var app = express();
 app.set('superSecret', config.secret);
 // view engine setup
 app.engine('html', ejs.renderFile);
-app.set('views', path.join(__dirname, '../../views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
@@ -30,8 +29,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
+app.use(express.static(path.join(__dirname, '../views')));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
 app.use('/', routes);
 app.use('/users', users);
