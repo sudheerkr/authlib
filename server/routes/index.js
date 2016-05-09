@@ -8,7 +8,8 @@ router.get('/new', function(req, res, next) {
 });
 
 router.get('/', function(req, res){
-	res.send('Hello! The api is at http://localhost: '+envPort+ '/api');
+	// res.send('Hello! The api is at http://localhost: '+envPort+ '/api');
+	res.render('index');
 });
 
 router.get('/setup', function(req, res){
