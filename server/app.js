@@ -33,7 +33,10 @@ app.use(express.static(path.join(__dirname, '../views')));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
-app.use('/', routes);
+app.get('/', function(req, res){
+  res.render('index');
+});
+// app.use('/', routes);
 app.use('/users', users);
 app.use('/api', auth);
 
