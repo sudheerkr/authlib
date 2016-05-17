@@ -1,6 +1,10 @@
+(function(){
+	'use strict';
 angular.module("authApp", ['ui.router'])
-	.config(routeConfiguration);
+	.config(routeConfiguration)
+	.factory('authService', authService);
 
+// app configurations
 function routeConfiguration($stateProvider, $urlRouterProvider){
 	$stateProvider
 		.state('index', {
@@ -14,3 +18,13 @@ function routeConfiguration($stateProvider, $urlRouterProvider){
 			controller: 'AboutCtrl'
 		});
 }
+
+// authService
+function authService($http){
+	$http.get('/api/auth').success(function(data){
+		console.log(data);
+	}).error(function(err){
+		console.log(err);
+	});
+}
+})();
