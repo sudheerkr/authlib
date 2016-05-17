@@ -20,11 +20,32 @@ function routeConfiguration($stateProvider, $urlRouterProvider){
 }
 
 // authService
-function authService($http){
-	$http.get('/api/auth').success(function(data){
-		console.log(data);
+function authService($http, $localStorage){
+	var auth = {
+		Login: Login,
+		Logout: Logout
+	};
+	//return auth
+	return auth;
+
+	function Login(user, password, callback){
+	$http.post('/api/auth', {user: user, password: password}).success(function(data){
+		if (data.token) {
+			$localStorage.currentUser = {username: token.username, token: data.token};
+			$http.defaults.headers.common.Authorization = 'Bearer'+ data.token;
+			callback(true);
+		}
 	}).error(function(err){
 		console.log(err);
 	});
+	}
+
+	// logout
+	function Logout(){
+		delete $localStorage.token;
+		$http.defaults.headers.common.Authorization = '';
+	}
+	}
+		
 }
 })();
