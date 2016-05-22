@@ -52,7 +52,7 @@
         };
 
         // isAuthorizedService: check if the use is authorize to access the next route
-        function isAuthorizedService() {
+        function isAuthorizedService(authorizedRoles) {
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }

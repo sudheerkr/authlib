@@ -1,8 +1,11 @@
 (function() {
     'use strict';
     angular.module("authApp", ['ui.router'])
-        .config(routeConfiguration);
-        // .factory('authService', authService);
+        .config(routeConfiguration)
+        .config(interceptor)
+        .run(onStateChange);
+
+    // .factory('authService', authService);
 
     // app configurations
     function routeConfiguration($stateProvider, $urlRouterProvider) {
@@ -17,7 +20,47 @@
                 templateUrl: 'about.html',
                 controller: 'AboutCtrl'
             });
-    }
+    };
+
+    // interceptor
+    function interceptor($httpProvider) {
+    	$httpProvider.interceptors.push(['$injector', function($injector){
+    		return $injector.get('AuthInterceptor');
+    	}]);
+    };
+
+    // onStateChange
+    function onStateChange($rootScope, $state, Auth, AUTH_EVENTS) {
+    	//  before each state change, check if user logged in 
+    	// and authorized to move onto the next state.
+    	$rootScope.$on('$stateChangeStart', function(event, next) {
+    		var authorizedRoles = next.data.authorizedRoles;
+    		if (!Auth.autho(authorizedRoles)) {
+    			event.preventDefault();
+    			if (Auth.authe()) {
+    				// user is not allowed.
+    				$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+    			} else {
+    				// user is not logged in.
+    				$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+    			}
+    		}
+    	});
+
+    	//  to show current active state.
+    	$rootScope.getClass = function(path) {
+    		if ($state.current.name == path) {
+    			return 'active';
+    		}else{
+    			return "";
+    		}
+    	};
+
+    	// logout 
+    	$rootScope.logout = function() {
+    		Auth.logout();
+    	};
+    };
 
     // // authService
     // function authService($http, $localStorage) {
