@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title></title>
+    <title></title>
 </head>
+
 <body ng-app="authApp">
+    <!-- all view inserted to view -->
+    <div ui-view></div>
+    <!-- bower: add files -->
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
-<!-- all view inserted to view -->
-<div ui-view></div>
-
-<script src="/bower_components/angular/angular.min.js"></script>
-<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-
-<script src="/javascripts/app.js"></script>
-<script src="/javascripts/controllers/mainCtrl.js"></script>
-<script src="/javascripts/controllers/aboutCtrl.js"></script>
+    <!-- add app js files -->
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/services/constant.js"></script>
+    <script src="/javascripts/services/authService.js"></script>
+    <script src="/javascripts/services/sessionService.js"></script>
+    <script src="/javascripts/services/authInterceptorService.js"></script>
+    <script src="/javascripts/controllers/signupCtrl.js"></script>
+    <script src="/javascripts/controllers/loginCtrl.js"></script>
+    <script src="/javascripts/controllers/mainCtrl.js"></script>
+    <script src="/javascripts/controllers/aboutCtrl.js"></script>
 </body>
+
 </html>

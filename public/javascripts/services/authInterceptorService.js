@@ -7,7 +7,7 @@
     function authInterceptor($rootScope, $q, Session, AUTH_EVENTS) {
 
     	// retrun response
-    	retrun {
+    	return {
     		responseError: function(response){
     			$rootScope.$broadcast({
     				401: AUTH_EVENTS.notAuthenticated,
@@ -15,8 +15,8 @@
     				419: AUTH_EVENTS.sessionTimeout,
     				440: AUTH_EVENTS.sessionTimeout
     			}[response.status], response);
-    			retrun $q.reject(response);
-    		};
+    			return $q.reject(response);
+    		}
     	};
     };
 })();
