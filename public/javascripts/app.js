@@ -19,6 +19,16 @@
                 url: '/about',
                 templateUrl: 'about.html',
                 controller: 'AboutCtrl'
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'partials/login.html',
+                controller: 'LoginCtrl'
+            })
+            .state('signup', {
+                url: '/signup',
+                templateUrl: 'partials/signup.html',
+                controller: 'SignupCtrl'
             });
     };
 
