@@ -1,6 +1,20 @@
 (function() {
     'use strict';
     angular.module("authApp", ['ui.router'])
+        .constant('USER_ROLES', {
+            all: '*',
+            admin: 'admin',
+            editor: 'editor',
+            guest: 'guest'
+        })
+        .constant('AUTH_EVENTS', {
+            loginSuccess: 'auth-login-success',
+            loginFailed: 'auth-login-failed',
+            logoutSuccess: 'auth-logout-success',
+            sessionTimeout: 'auth-session-timeout',
+            notAuthenticated: 'auth-not-authenticated',
+            notAuthorized: 'auth-not-authorized'
+        })
         .config(routeConfiguration)
         .config(interceptor)
         .run(onStateChange);
@@ -34,42 +48,42 @@
 
     // interceptor
     function interceptor($httpProvider) {
-    	$httpProvider.interceptors.push(['$injector', function($injector){
-    		return $injector.get('AuthInterceptor');
-    	}]);
+        $httpProvider.interceptors.push(['$injector', function($injector) {
+            return $injector.get('AuthInterceptor');
+        }]);
     };
 
     // onStateChange
     function onStateChange($rootScope, $state, Auth, AUTH_EVENTS) {
-    	//  before each state change, check if user logged in 
-    	// and authorized to move onto the next state.
-    	$rootScope.$on('$stateChangeStart', function(event, next) {
-    		var authorizedRoles = next.data.authorizedRoles;
-    		if (!Auth.autho(authorizedRoles)) {
-    			event.preventDefault();
-    			if (Auth.authe()) {
-    				// user is not allowed.
-    				$rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-    			} else {
-    				// user is not logged in.
-    				$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
-    			}
-    		}
-    	});
+        //  before each state change, check if user logged in 
+        // and authorized to move onto the next state.
+        $rootScope.$on('$stateChangeStart', function(event, next) {
+            var authorizedRoles = next.data.authorizedRoles;
+            if (!Auth.autho(authorizedRoles)) {
+                event.preventDefault();
+                if (Auth.authe()) {
+                    // user is not allowed.
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                } else {
+                    // user is not logged in.
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+                }
+            }
+        });
 
-    	//  to show current active state.
-    	$rootScope.getClass = function(path) {
-    		if ($state.current.name == path) {
-    			return 'active';
-    		}else{
-    			return "";
-    		}
-    	};
+        //  to show current active state.
+        $rootScope.getClass = function(path) {
+            if ($state.current.name == path) {
+                return 'active';
+            } else {
+                return "";
+            }
+        };
 
-    	// logout 
-    	$rootScope.logout = function() {
-    		Auth.logout();
-    	};
+        // logout 
+        $rootScope.logout = function() {
+            Auth.logout();
+        };
     };
 
     // // authService

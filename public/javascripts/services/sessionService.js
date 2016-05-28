@@ -1,7 +1,7 @@
 (function() {
 		'use strict';
 		angular.module('authApp')
-				.service('Session', sessionService);
+				.service('Session', ['$rootScope', 'USER_ROLES', sessionService]);
 
 		// sessionService
 		function sessionService($rootScope, USER_ROLES) {
