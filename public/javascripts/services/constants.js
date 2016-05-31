@@ -1,7 +1,8 @@
 (function() {
     'use strict';
+    /* global USER_ROLES:false, AUTH_EVENTS:false */
+    //  contant for user login define hear.
     angular.module('authApp')
-        //  contant for user login define hear.
         .constant('USER_ROLES', {
             all: '*',
             admin: 'admin',
