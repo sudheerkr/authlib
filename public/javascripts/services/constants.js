@@ -17,4 +17,4 @@
             notAuthenticated: 'auth-not-authenticated',
             notAuthorized: 'auth-not-authorized'
         });
-});
+})();

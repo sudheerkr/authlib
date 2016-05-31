@@ -1,25 +1,8 @@
 (function() {
     'use strict';
     angular.module("authApp", ['ui.router'])
-        .constant('USER_ROLES', {
-            all: '*',
-            admin: 'admin',
-            editor: 'editor',
-            guest: 'guest'
-        })
-        .constant('AUTH_EVENTS', {
-            loginSuccess: 'auth-login-success',
-            loginFailed: 'auth-login-failed',
-            logoutSuccess: 'auth-logout-success',
-            sessionTimeout: 'auth-session-timeout',
-            notAuthenticated: 'auth-not-authenticated',
-            notAuthorized: 'auth-not-authorized'
-        })
-        
         .config(interceptor)
         .run(onStateChange);
-
-    // .factory('authService', authService);
 
     // interceptor
     function interceptor($httpProvider) {
