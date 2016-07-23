@@ -7,7 +7,7 @@
     function routeConfiguration($stateProvider, $urlRouterProvider, USER_ROLES) {
         $stateProvider
             .state('404', {
-                url : '404',
+                url : '/404',
                 templateUrl : '404.html' 
             })
             .state('in', {
