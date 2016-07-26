@@ -12,20 +12,12 @@
             })
             .state('in', {
                 abstract : true,
-                templateUrl : 'in.html'
-            })
-            .state('index', {
-                url: '/index',
-                templateUrl: 'main.html',
-                controller: 'MainCtrl',
-                data: {
-                    authorizedRoles: [USER_ROLES.admin]
-                }
+                templateUrl : 'partials/in.html'
             })
             .state('about', {
                 url: '/about',
                 templateUrl: 'about.html',
-                controller: 'AboutCtrl'
+                controller: 'AboutCtrl',
                 data: {
                     authorizedRoles: [USER_ROLES.all]
                 }
@@ -33,7 +25,7 @@
             .state('login', {
                 url: '/login',
                 templateUrl: 'partials/login.html',
-                controller: 'LoginCtrl'
+                controller: 'LoginCtrl',
                 data: {
                     authorizedRoles: [USER_ROLES.all]
                 }
@@ -41,7 +33,7 @@
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'partials/signup.html',
-                controller: 'SignupCtrl'
+                controller: 'SignupCtrl',
                 data: {
                     authorizedRoles: [USER_ROLES.all]
                 }
