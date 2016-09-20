@@ -33,13 +33,13 @@ app.use(express.static(path.join(__dirname, '../views')));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
-app.get('*', function(req, res){
-  res.render('index');
-});
 // app.use('/', routes);
 app.use('/users', users);
 app.use('/api', auth);
 
+app.get('*', function(req, res){
+  res.render('index');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

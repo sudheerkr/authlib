@@ -12,6 +12,7 @@ router.get('/alluser', function(req, res){
 		if (err) {
 			throw err;
 		}else{
+			console.log(users);
 			res.json(users);
 		}
 	});

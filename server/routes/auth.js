@@ -3,7 +3,7 @@ var apiRouter = express.Router();
 var config = require('../../config/config');
 var usermodel = require('../models/users');
 var authCall = require('./authCalls');
-var jwt = require('jsonwebtoken');
+
 // config secret 
 // create authentication route /users/auth
 apiRouter.post('/auth', authCall.auth);
