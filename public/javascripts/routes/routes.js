@@ -4,7 +4,7 @@
         .config(routeConfiguration);
 
     // app configurations
-    function routeConfiguration($stateProvider, $urlRouterProvider, USER_ROLES) {
+    function routeConfiguration($stateProvider, $urlRouterProvider, $locationProvider, USER_ROLES) {
         $stateProvider
             .state('404', {
                 url : '/404',
@@ -19,7 +19,7 @@
                 templateUrl: 'about.html',
                 controller: 'AboutCtrl',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedRoles: [USER_ROLES.admin]
                 }
             })
             .state('login', {
@@ -38,5 +38,7 @@
                     authorizedRoles: [USER_ROLES.all]
                 }
             });
+
+            $locationProvider.html5Mode({enabled: true, requireBase:false})
     };
 })();

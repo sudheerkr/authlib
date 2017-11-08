@@ -5,6 +5,8 @@
 
     // sessionService
     function sessionService($rootScope, USER_ROLES) {
+        this.user = 'defoult';
+        this.userRole = '*';
         // create User
         this.create = function(user) {
             this.user = user;

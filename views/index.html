@@ -2,10 +2,11 @@
 <html>
 
 <head>
-    <title></title>
+    <base href="/">
+    <title>Hello Page</title>
 </head>
 
-<body ng-app="authApp">
+<body ng-app="authApp"  ng-controller="ParentCtrl">
     <!-- all view inserted to view -->
     <div ui-view></div>
     <!-- bower: add files -->
@@ -20,6 +21,7 @@
     <script src="/javascripts/services/authService.js"></script>
     <script src="/javascripts/services/authInterceptorService.js"></script>
     <script src="/javascripts/controllers/signupCtrl.js"></script>
+    <script src="/javascripts/controllers/parentCtrl.js"></script>
     <script src="/javascripts/controllers/loginCtrl.js"></script>
     <script src="/javascripts/controllers/mainCtrl.js"></script>
     <script src="/javascripts/controllers/aboutCtrl.js"></script>

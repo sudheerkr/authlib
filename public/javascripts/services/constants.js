@@ -6,8 +6,6 @@
         .constant('USER_ROLES', {
             all: '*',
             admin: 'admin',
-            editor: 'editor',
-            guest: 'guest'
         })
         .constant('AUTH_EVENTS', {
             loginSuccess: 'auth-login-success',
