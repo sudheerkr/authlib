@@ -1,5 +1,6 @@
 var usermodel = require('../models/users');
 var jwt = require('jsonwebtoken');
+var config = require('../../config/config');
 
 // authenticate routers
 exports.auth = function(req, res){
@@ -17,9 +18,8 @@ exports.auth = function(req, res){
 					res.json({success:false, message: 'Auth failed. Worng Password.'});
 				}else{
 					// if user is found and correct password.
-					var app = require('.././app');
 					// create web token
-					var token = jwt.sign(user, app.get('superSecret'), {expiresIn:1440});
+					var token = jwt.sign(user, config.secret, {expiresIn:1440});
 
 					//return the information
 					res.json({success:true, message: 'Enjoy the Token..', token: token});
@@ -36,8 +36,7 @@ exports.allRouters = function(req, res, next){
 	//decode token 
 	if (token) {
 		// verifies secret and exp
-		var app = require('.././app');
-		jwt.verify(token,  app.get('superSecret'), function(err, decoded){
+		jwt.verify(token,  config.secret, function(err, decoded){
 			if (err) {
 				res.json({success: false, message: 'Failed to authenticate token'});
 			}else{
