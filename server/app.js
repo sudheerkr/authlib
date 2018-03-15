@@ -5,10 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-// jwt or model require
 var jwt = require('jsonwebtoken');
-// config setting
 var config = require('../config/config');
 
 
