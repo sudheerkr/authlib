@@ -1,10 +1,20 @@
 let userSchema = {
 	email : {
 		type : String,
+		unique : true,
 		required : true
+	},
+	password : {
+		type : String,
+		required: true
 	},
 	name : {
 		type : String
+	},
+	userType : {
+		type : String,
+		enum : ['customer', 'admin', 'partner'],
+		default : 'customer'
 	},
 	dob : {
 		type : Date
@@ -21,7 +31,7 @@ let userSchema = {
 		type : Date,
 		default : Date.now
 	},
-	is_deleted : {
+	status : {
 		type : Boolean,
 		default : false
 	}
