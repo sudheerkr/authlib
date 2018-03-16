@@ -6,15 +6,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
-var config = require('../config/config');
+var configs = require('../configs/configs');
 
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var auth = require('./routes/auth');
+var connection = require('./models/index');
+// var routes = require('./routes/index');
+// var users = require('./routes/users');
+// var auth = require('./routes/auth');
 
 var app = express();
-app.set('superSecret', config.secret);
+app.set('superSecret', configs.secret);
 // view engine setup
 app.engine('html', ejs.renderFile);
 app.set('views', path.join(__dirname, '../views'));
@@ -31,8 +31,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
 // app.use('/', routes);
-app.use('/users', users);
-app.use('/api', auth);
+// app.use('/users', users);
+// app.use('/api', auth);
 
 app.get('*', function(req, res){
   res.render('index');

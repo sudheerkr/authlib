@@ -1,5 +1,7 @@
-module.exports = {
+const config = {
 	secret: 'authlibpackage',
 	// cerate db link 'mongodb://username:password@host:port/database?options...'
-	database: 'mongodb://authlib:addd@localhost:27017/authlib'
+	db_url : "mongodb://adminUser:adminuser@127.0.0.1:27017/admin"
 };
+
+module.exports = config;
